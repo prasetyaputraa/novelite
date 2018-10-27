@@ -7,7 +7,9 @@ use App\Http\Controllers\Controller;
 
 use App\Models\User as User;
 use Illuminate\Support\Facades\Auth;
+
 use Validator;
+use Carbon\Carbon;
 
 class UserController extends Controller
 {
@@ -25,9 +27,17 @@ class UserController extends Controller
               'password' => request('password')
           ])
       ) {
-          $user = Auth::user();
+          $user  = Auth::user();
+          $tokenResult = $user->createToken('Novelite');
+          $token = $tokenResult->token;
 
-          $success['token'] = $user->createToken('MyApp')->accessToken;
+          $token->expires_at = Carbon::now()->addWeeks(1);
+          $token->save();
+
+          $success['access_token'] = $tokenResult->accessToken;
+          $success['token_type']   = 'Bearer';
+          $success['expires_at']   = Carbon::parse($token->expires_at)->toDateTimeString();
+          $success['id']           = Auth::id();
 
           return response()->json(
               ['success' => $success],
@@ -68,5 +78,12 @@ class UserController extends Controller
         $success['name']  = $user->name;
 
         return response()->json(['success' => $success], $this->successStatus);
+    }
+
+    public function logout(Request $request) {
+        $user = $request->user()->token();
+        $user->revoke();
+
+        return '200 logged out';
     }
 }

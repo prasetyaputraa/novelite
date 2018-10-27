@@ -83,7 +83,6 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapUserApiRoutes()
     {
       Route::group([
-              'middleware' => 'api',
               'prefix'     => 'api/user',
               'namespace'  => $this->namespace,
               'as'         => 'user.'
