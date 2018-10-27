@@ -27,9 +27,9 @@ class UserController extends Controller
               'password' => request('password')
           ])
       ) {
-          $user  = Auth::user();
+          $user        = Auth::user();
           $tokenResult = $user->createToken('Novelite');
-          $token = $tokenResult->token;
+          $token       = $tokenResult->token;
 
           $token->expires_at = Carbon::now()->addWeeks(1);
           $token->save();
