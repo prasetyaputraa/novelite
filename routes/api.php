@@ -13,6 +13,9 @@ use Illuminate\Http\Request;
 |
 */
 
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
+    dump('jalan api');
+    dump($request);
     return $request->user();
 });
