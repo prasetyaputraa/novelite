@@ -13,8 +13,6 @@ use Carbon\Carbon;
 
 class UserController extends Controller
 {
-    public $successStatus = 200;
-    //
     public function index(Request $r) 
     {
     }
@@ -80,10 +78,25 @@ class UserController extends Controller
         return response()->json(['success' => $success], $this->successStatus);
     }
 
+    /*
+     * Below is the codes where authentications were needed
+     */
+
     public function logout(Request $request) {
         $user = $request->user()->token();
         $user->revoke();
 
         return '200 logged out';
+    }
+
+    public function updateProfile($request)
+    {
+        $modelUser = new User();
+
+        $user = $request->user();
+
+        $modelUser->update($request);
+
+        return 200;
     }
 }

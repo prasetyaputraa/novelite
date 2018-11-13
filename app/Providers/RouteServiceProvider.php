@@ -41,7 +41,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapUserApiRoutes();
 
-        //
+        $this->mapNovelApiRoutes();
     }
 
     /**
@@ -88,6 +88,25 @@ class RouteServiceProvider extends ServiceProvider
               'as'        => 'user.'
           ], function() {
               require base_path('routes/api.user.php');
+          }
+      );
+    }
+
+    /**
+     * Define the "api" routes for the application.
+     *
+     * These routes are typically stateless.
+     *
+     * @return void
+     */
+    protected function mapNovelApiRoutes()
+    {
+      Route::group([
+              'prefix'    => 'api/novel',
+              'namespace' => $this->namespace,
+              'as'        => 'novel.'
+          ], function() {
+              require base_path('routes/api.novel.php');
           }
       );
     }

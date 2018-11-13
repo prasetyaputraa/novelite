@@ -28,4 +28,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function novels()
+    {
+        return $this->belongsToMany(Novel::class, 'novel_user')->withTimestamps();
+    }
 }

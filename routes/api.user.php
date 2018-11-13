@@ -3,8 +3,8 @@
 Route::group([
         'middleware' => 'api'
     ], function () {
-        Route::post('login', 'User\UserController@login')->name('userlogin');
         Route::post('register', 'User\UserController@register')->name('userregister');
+        Route::post('login', 'User\UserController@login')->name('userlogin');
 });
 
 Route::group([

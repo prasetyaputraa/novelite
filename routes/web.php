@@ -12,7 +12,5 @@
 */
 
 Route::get('/', function () {
-    dump('jalan web');
-
     return view('welcome');
 });

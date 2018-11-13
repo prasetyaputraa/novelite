@@ -15,9 +15,11 @@ class CreateNovelsTable extends Migration
     {
         Schema::create('novels', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('title');
             $table->string('description');
+            $table->string('author');
             $table->integer('genre_id')->unsigned();
+            $table->string('cover');
             $table->timestamps();
 
             $table->foreign('genre_id')
