@@ -16,7 +16,7 @@ class NovelsTableSeeder extends Seeder
         $users  = App\Models\User::all();
 
         $users->each(function ($user) use ($novels) {
-            $user->novels()->attach(
+            $user->favoriteNovels()->attach(
                 $novels->random(rand(3, 5))->pluck('id')->toArray()
             );
         });

@@ -13,7 +13,7 @@ class CreateNovelsUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('novel_user', function (Blueprint $table) {
+        Schema::create('favorites', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('novel_id')->unsigned();
             $table->integer('user_id')->unsigned();
@@ -37,7 +37,7 @@ class CreateNovelsUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('novel_user', function (Blueprint $table) {
+        Schema::table('favorites', function (Blueprint $table) {
             //
         });
     }

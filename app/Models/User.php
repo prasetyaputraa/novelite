@@ -29,8 +29,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function novels()
+    public function favoriteNovels()
     {
-        return $this->belongsToMany(Novel::class, 'novel_user')->withTimestamps();
+        return $this->belongsToMany(Novel::class, 'favorites')->withTimestamps();
     }
 }
