@@ -16,8 +16,9 @@ Route::group([
             'prefix' => 'novel'
         ], function () {
             Route::post('toc', 'Novel\NovelController@getChapters')->name('tableofcontents');
-            Route::post('favorites', 'Novel\NovelController@getUserFavoriteNovels')->name('favoritenovels');
-            Route::post('togglefavorite', 'Novel\NovelController@toggleFav')->name('readchapter');
+            Route::post('explore', 'Novel\NovelController@explore')->name('explore');
+            Route::post('favorites', 'Novel\NovelController@getFavoriteNovels')->name('favoritenovels');
+            Route::post('togglefavorite', 'Novel\NovelController@toggleFavorite')->name('readchapter');
 
             Route::post('read', 'Chapter\ChapterController@read')->name('readchapter');
         });

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Novel;
 
+use App\Models\Novel;
+use App\Models\Favorite;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -18,22 +20,54 @@ class NovelController extends Controller
 
         //TODO return home data personalised for logged user
         //ex: history, favorites
-        return $userId;
+        return response()->json($user);
     }
 
-    public function toggleFavorite(boolean $switch, int $id)
+    public function getFavoriteNovels(Request $request)
     {
-        $modelNovelFav = new Novel_Favorite();
+        $user = $request->user();
 
-        if ($switch && $modelNovelFav->makeFavorite($id)) {
+        return response()->json($user->favoriteNovels);
+    }
+
+
+    public function toggleFavorite(Request $request)
+    {
+        $modelNovel = new Novel();
+
+        $user = $request->user();
+
+        $novel       = $modelNovel->find($request['novel_id']);
+        $isFavorited = ($novel->usersWhoFavorited->find($user->id) !== null);
+
+        try {
+            if (!$isFavorited) {
+                $novel->usersWhoFavorited()->attach($user);
+
+                return response()->json(
+                    $this->successStatus
+                );
+            }
+
+            if ($novel->usersWhoFavorited()->detach($user)) {
+                return response()->json(
+                    $this->successStatus
+                );
+            }
+
             return response()->json(
-                $this->successStatus
+                [
+                    'header'  => 500,
+                    'message' => 'failed to toggle favorite/unfavorite'
+                ]
             );
-        } elseif (!$switch && $modelNovelFav->removeFavorite($id)) {
+        } catch (Exception $e) {
             return response()->json(
-                $this->successStatus
+                500,
+                $e->getMessage()
             );
         }
+
     }
 
     public function readChapter(int $chapterId)
@@ -53,7 +87,6 @@ class NovelController extends Controller
 
         return $file;
     }
-
     /*
      * Below is code for administrator
      */
