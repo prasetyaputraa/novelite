@@ -41,7 +41,6 @@ class UserController extends Controller
               ['success' => $success],
               $this->successStatus
           );
-
       } else {
           return response()->json(
               ['error' => 'Unauthorised'],
@@ -82,7 +81,8 @@ class UserController extends Controller
      * Below is the codes where authentications were needed
      */
 
-    public function logout(Request $request) {
+    public function logout(Request $request) 
+    {
         $user = $request->user()->token();
         $user->revoke();
 

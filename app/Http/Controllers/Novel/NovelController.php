@@ -87,6 +87,7 @@ class NovelController extends Controller
 
         return $file;
     }
+
     /*
      * Below is code for administrator
      */
