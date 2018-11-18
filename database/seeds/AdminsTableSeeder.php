@@ -1,9 +1,9 @@
 <?php
 
-use App\Models\Favorite;
+use App\Models\Admin;
 use Illuminate\Database\Seeder;
 
-class FavoritesTableSeeder extends Seeder
+class AdminsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +12,6 @@ class FavoritesTableSeeder extends Seeder
      */
     public function run()
     {
-        $favorites = factory(Favorite::class, 100)->create();
+        $admins = factory(Admin::class, 1)->create();
     }
 }

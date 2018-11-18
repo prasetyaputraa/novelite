@@ -12,12 +12,19 @@ class NovelsTableSeeder extends Seeder
      */
     public function run()
     {
-        $novels = factory(Novel::class, 20)->create();
-        $users  = App\Models\User::all();
+        $novels  = factory(Novel::class, 20)->create();
+        $users   = App\Models\User::all();
+        $admins  = App\Models\Admin::all();
 
         $users->each(function ($user) use ($novels) {
             $user->favoriteNovels()->attach(
                 $novels->random(rand(3, 5))->pluck('id')->toArray()
+            );
+        });
+
+        $admins->each(function ($admin) use ($novels) {
+            $admin->favoriteNovels()->attach(
+                $novels->random(rand(1, 3))->pluck('id')->toArray()
             );
         });
     }
