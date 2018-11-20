@@ -16,6 +16,5 @@ class DatabaseSeeder extends Seeder
         $this->call(GenresTableSeeder::class);
         $this->call(NovelsTableSeeder::class);
         $this->call(ChaptersTableSeeder::class);
-        //$this->call(FavoritesTableSeeder::class);
     }
 }

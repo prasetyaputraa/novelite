@@ -24,7 +24,7 @@ class NovelsTableSeeder extends Seeder
 
         $admins->each(function ($admin) use ($novels) {
             $admin->favoriteNovels()->attach(
-                $novels->random(rand(3, 5))->pluck('id')->toArray()
+                $novels->random(rand(1, 3))->pluck('id')->toArray()
             );
         });
     }

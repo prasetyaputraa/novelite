@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use Route;
+use Illuminate\Support\Facades\Route;
 use Laravel\Passport\Passport;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -26,7 +26,13 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-        Passport::routes();
+
+        Route::group(
+            ['middleware' => 'passport-admins'],
+            function () {
+                Passport::routes();
+            }
+        );
 
         Route::group(['middleware' => 'oauth.providers'], function () {
             dump('fucker');
