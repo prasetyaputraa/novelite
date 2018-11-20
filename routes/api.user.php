@@ -3,7 +3,6 @@
 Route::group([
         'middleware' => 'api'
     ], function () {
-        dump('hit');
         Route::post('register', 'User\UserController@register')->name('userregister');
         Route::post('login', 'User\UserController@login')->name('userlogin');
         //Route::post('login', function () { return 'Hit u with dat ddu ddu';})->name('userlogin');

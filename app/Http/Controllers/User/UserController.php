@@ -27,8 +27,6 @@ class UserController extends Controller
     {
         $credentials = array_values($request->only('email', 'password', 'provider'));
 
-        dump($credentials);
-
         if (!$user = $this->authenticator->attempt(...$credentials)) {
             throw new AuthenticationException();
             //return response()->json(

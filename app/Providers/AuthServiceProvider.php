@@ -27,15 +27,9 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Route::group(
-            ['middleware' => 'passport-admins'],
-            function () {
-                Passport::routes();
-            }
-        );
+        Passport::routes();
 
         Route::group(['middleware' => 'oauth.providers'], function () {
-            dump('fucker');
             Passport::routes(function ($router) {
                 return $router->forAccessTokens();
             });
