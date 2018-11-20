@@ -14,9 +14,16 @@ class NovelsTableSeeder extends Seeder
     {
         $novels = factory(Novel::class, 20)->create();
         $users  = App\Models\User::all();
+        $admins = App\Models\Admin::all();
 
         $users->each(function ($user) use ($novels) {
             $user->favoriteNovels()->attach(
+                $novels->random(rand(3, 5))->pluck('id')->toArray()
+            );
+        });
+
+        $admins->each(function ($admin) use ($novels) {
+            $admin->favoriteNovels()->attach(
                 $novels->random(rand(3, 5))->pluck('id')->toArray()
             );
         });

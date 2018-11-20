@@ -42,6 +42,8 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapUserApiRoutes();
 
         $this->mapNovelApiRoutes();
+
+        $this->mapAdminApiRoutes();
     }
 
     /**
@@ -87,6 +89,7 @@ class RouteServiceProvider extends ServiceProvider
               'namespace' => $this->namespace,
               'as'        => 'user.'
           ], function() {
+              dump('should be 2nd');
               require base_path('routes/api.user.php');
           }
       );

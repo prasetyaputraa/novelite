@@ -3,20 +3,14 @@
 Route::group([
         'middleware' => 'api'
     ], function () {
-        dump('hit');
         Route::post('register', 'User\UserController@register')->name('userregister');
-        Route::post('login', 'User\UserController@login')->name('userlogin');
-        //Route::post('login', function () { return 'Hit u with dat ddu ddu';})->name('userlogin');
+        Route::post('login', 'Admin\AdminController@login')->name('adminlogin');
 });
 
 Route::group([
-        'middleware' => ['api', 'multiauth:api']
+        'middleware' => ['api', 'multiauth:admin']
     ], function () {
-        Route::post('logout', 'User\UserController@logout')->name('logout');
-        //Route::post('logout', function (Request $request) {
-        //    dump($request);
-        //    return $request->user();
-        //})->name('logout');
+        Route::post('logout', 'Admin\AdminController@logout')->name('logout');
 
         Route::group([
             'prefix' => 'novel'

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Validator;
 use Carbon\Carbon;
 
-class UserController extends Controller
+class AdminController extends Controller
 {
     private $authenticator;
 

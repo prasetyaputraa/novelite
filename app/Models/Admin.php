@@ -8,7 +8,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use SMartins\PassportMultiauth\HasMultiAuthApiTokens;
 
-class User extends Authenticatable
+
+class Admin extends Authenticatable
 {
     use Notifiable, HasMultiAuthApiTokens;
 
@@ -32,6 +33,6 @@ class User extends Authenticatable
 
     public function favoriteNovels()
     {
-        return $this->belongsToMany(Novel::class, 'favorites')->withTimestamps();
+        return $this->belongsToMany(Novel::class, 'favorites_admins')->withTimestamps();
     }
 }

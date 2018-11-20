@@ -12,6 +12,11 @@ class Novel extends Model
         return $this->belongsToMany(User::class, 'favorites')->withTimestamps();
     }
 
+    public function adminsWhoFavorited()
+    {
+        return $this->belongsToMany(Admin::class, 'favorites_admins')->withTimestamps();
+    }
+
     public function chapters()
     {
         return $this->hasMany(Chapter::class);
