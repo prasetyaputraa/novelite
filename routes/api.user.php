@@ -18,7 +18,8 @@ Route::group([
             Route::post('toc', 'Novel\NovelController@getChapters')->name('tableofcontents');
             Route::post('explore', 'Novel\NovelController@explore')->name('explore');
             Route::post('favorites', 'Novel\NovelController@getFavoriteNovels')->name('favoritenovels');
-            Route::post('togglefavorite', 'Novel\NovelController@toggleFavorite')->name('readchapter');
+            Route::post('togglefavorite', 'Novel\NovelController@toggleFavorite')->name('tooglefavorite');
+            Route::post('postchapter', 'Novel\NovelController@postChapter')->name('postchapter');
 
             Route::post('read', 'Chapter\ChapterController@read')->name('readchapter');
         });

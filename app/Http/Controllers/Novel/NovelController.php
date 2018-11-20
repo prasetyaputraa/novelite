@@ -70,7 +70,7 @@ class NovelController extends Controller
 
     }
 
-    public function readChapter(int $chapterId)
+    public function readChapter($request)
     {
         $modelNovelChapter = new Novel_Chapter();
         $modelNovelHistory = new Novel_History();
@@ -120,6 +120,39 @@ class NovelController extends Controller
         $modelNovel = new Novel();
 
         $modelNovel->delete($request);
+    }
+
+    public function postChapter($request)
+    {
+        $modelChapter = new Chapter();
+
+        $pdf = $request->file('chapter-pdf');
+
+        if (!$pdf) {
+            return response()->json(
+                404,
+                'Bad Request'
+            );
+        }
+
+        $data = $request;
+
+        try {
+            $data['url'] = $pdf->store('public/chapters');
+
+            $modelChapter->find($request->novel_id)->postChapter($request);
+        } catch (Exception $e) {
+            return response()->json(
+                500,
+                'There are some problems with our server.'
+            );
+        }
+
+        return response()->json(
+            200,
+            'OK'
+        );
+
     }
 
     public function updateChapter($chapterId, $file)
